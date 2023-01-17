@@ -13,9 +13,17 @@ public class TicTacToe
    */
   public TicTacToe()
   {
-    players = new Player[2];
-    players[0] = new Player("X");
-    players[1] = new Player("O");
+    Scanner scan = new Scanner(System.in);
+    System.out.println("How many players? (2-4)");
+    int totalPlayers = scan.nextInt();
+    players = new Player[totalPlayers];
+    try {
+        players[0] = new Player("X");
+        players[1] = new Player("O");
+        players[2] = new Player("R");
+        players[3] = new Player("A");
+    } catch (Exception ignored) {
+    }
 		board = new Board();
     
     // draws the board as part of setup
