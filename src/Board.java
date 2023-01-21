@@ -1,20 +1,29 @@
+import java.util.Scanner;
 public class Board
 {
   private Space[] spaces;
   private WinCondition[] winningConfigs;
-    
+  private int boardSize;
+
   /**
    * Constructs 9 new Space objects and adds them to the spaces array.
    * Also sets up the 8 winning conditions for tic-tac-toe.
    */
 	public Board()
 	{
-    spaces = new Space[9];
+    Scanner scan = new Scanner(System.in);
+    System.out.print("How many spaces? (Enter 9 for: 3x3, Enter 16 for: 4x4, Enter 25 for: 5x5, Enter 36 for: 6x6): ");
+    boardSize = scan.nextInt();
+    while (boardSize != 9 && boardSize != 16 && boardSize != 25 && boardSize != 36) {
+        System.out.print("Please enter one of the choices: ");
+        boardSize = scan.nextInt();
+    }
+    spaces = new Space[boardSize];
     for (int i = 0; i < spaces.length; i++)
     {
       spaces[i] = new Space();
     }
-    
+
     winningConfigs = new WinCondition[8];
     winningConfigs[0] = new WinCondition(0, 1, 2);
     winningConfigs[1] = new WinCondition(3, 4, 5);
@@ -25,7 +34,7 @@ public class Board
     winningConfigs[6] = new WinCondition(0, 4, 8);
     winningConfigs[7] = new WinCondition(2, 4, 6);
 	}
-  
+
   // getter method; note that there is
   // a parameter, which allows caller to specify
   // which specific Space (of the 9) to return
@@ -34,10 +43,10 @@ public class Board
     if (idx >= 0 && idx < spaces.length)
     {
       return spaces[idx];
-    }  
+    }
     return null;
   }
-  
+
   /**
    * Draws the tic-tac-toe board so that the user can see what is happening.
    * The empty board should look like this:
@@ -64,22 +73,26 @@ public class Board
 	{
     System.out.println();
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < boardSize; i++)
 		{
 			Space space = spaces[i];
-      
+
 			if (space.getSymbol() == Space.BLANK)
       {
-        // number them 1 thru 9
-			  System.out.print(i + 1);
+        // number them 1 thru boardSize
+          if (i + 1 <= 9) {
+              System.out.print(i + 1 + " ");
+          } else {
+              System.out.print(i + 1);
+          }
       }
 			else
       {
 				System.out.print(space.getSymbol());
       }
-      
+
       // print a horizontal divider after each set of 3
-			if((i + 1) % 3 == 0)
+			if((i + 1) % Math.sqrt(boardSize) == 0)
       {
 				System.out.println("\n-----");
       }
@@ -89,9 +102,9 @@ public class Board
 				System.out.print("|");
       }
 		}
-      
-		System.out.println();	
-	}	
+
+		System.out.println();
+	}
 
   /**
    * Updates a space based on a player's move by changing it from a blank space to either
@@ -110,14 +123,14 @@ public class Board
 	{
     // since spaces are numbered 1-9, subtract 1 to correlate to 0-8 index range
     int adjustedSpace = spaceIdx - 1;
-    
+
     // if user chooses a space between 1 and 9, try to occupy it, which updates
     // the symbol and returns true if the space is currently a numbered "blank" space
     if (adjustedSpace >= 0 && adjustedSpace < spaces.length)
     {
       boolean spaceOccupied = spaces[adjustedSpace].occupySpace(player.getSymbol());
       return spaceOccupied;
-    }     
+    }
     return false;
 	}
 
@@ -142,15 +155,15 @@ public class Board
         // or 3 O's in a row), so arbitrarily choose the first int value
         // in the array (index 0) to get the winning symbol
         int spaceWithWinningSymbol = config.getWinningSpaces()[0];
-        
+
         String winningSymbol = spaces[spaceWithWinningSymbol].getSymbol();
-        
+
         return winningSymbol;
       }
     }
-   	return Space.BLANK;	
+   	return Space.BLANK;
 	}
-   
+
   /**
    * Determines whether or not all 3 received spaces have the same symbol.
    *
@@ -163,7 +176,7 @@ public class Board
     int s1 = winningSpaces[0];
     int s2 = winningSpaces[1];
     int s3 = winningSpaces[2];
-    
+
 		return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol();
 	}
 
@@ -171,7 +184,7 @@ public class Board
    *Determines whether or not the board is full (has no BLANK spaces).
    *
    *@return True if there are no BLANKs in any spaces.
-   */	
+   */
 	public boolean isFull()
 	{
 		for (int i = 0; i < spaces.length; i++)
@@ -181,7 +194,6 @@ public class Board
         return false;
       }
     }
-		return true;	
+		return true;
 	}
 }
-		
