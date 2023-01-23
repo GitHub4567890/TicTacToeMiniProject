@@ -42,59 +42,31 @@ public class Board
             winningConfigs[counter] = new WinCondition(i, i + 1, i + 2);
         } else if (boardLength == 4) {
             winningConfigs[counter] = new WinCondition(i, i + 1, i + 2, i + 3);
-            System.out.println(i+", "+i+" + 1, "+i+" + 2, "+i+" + 3");
         } else if (boardLength == 5) {
             winningConfigs[counter] = new WinCondition(i, i + 1, i + 2, i + 3, i + 4);
-            System.out.println(i+", "+i+" + 1, "+i+" + 2, "+i+" + 3"+i+" + 4");
         } else if (boardLength == 6) {
             winningConfigs[counter] = new WinCondition(i, i + 1, i + 2, i + 3, i + 4, i + 5);
-            System.out.println(i+", "+i+" + 1, "+i+" + 2, "+i+" + 3"+i+" + 4"+i+" + 5");
 
         }
         counter++;
     }
-//    counter++;
-    System.out.println(counter);
 
         for (int i = 0; i <= boardLength; i += 1) {
             if (boardLength == 3) {
                 winningConfigs[counter] = new WinCondition(i, i + boardLength, (i + boardLength * 2));
-                System.out.println(i + "," + i + boardLength + ",(" + i + boardLength + "* 2)");
                 winningConfigs[7] = new WinCondition(0, 4, 8);
             } else if (boardLength == 4) {
                 winningConfigs[counter] = new WinCondition(i, i + boardLength, (i + boardLength * 2), (i + boardLength * 3));
-                System.out.println(i + "," + i + boardLength + ",(" + i + boardLength + "* 2)" + ",(" + i + boardLength + "* 3)");
                 winningConfigs[9] = new WinCondition(0, 5, 10, 15);
             } else if (boardLength == 5) {
                 winningConfigs[counter] = new WinCondition(i, i + boardLength, (i + boardLength * 2), (i + boardLength * 3), (i + boardLength * 4));
-                System.out.println(i + "," + i + boardLength + ",(" + i + boardLength + "* 2)" + ",(" + i + boardLength + "* 3)" + ",(" + i + boardLength + "* 4)");
                 winningConfigs[11] = new WinCondition(0, 6, 12, 18, 24);
             } else if (boardLength == 6) {
                 winningConfigs[counter] = new WinCondition(i, i + boardLength, (i + boardLength * 2), (i + boardLength * 3), (i + boardLength * 4), (i + boardLength * 5));
-                System.out.println(i + "," + i + boardLength + ",(" + i + boardLength + "* 2)" + ",(" + i + boardLength + "* 3)" + ",(" + i + boardLength + "* 4)" + ",(" + i + boardLength + "* 5)");
                 winningConfigs[13] = new WinCondition(0, 7, 14, 21, 28, 35);
             }
             counter++;
         }
-
-//        for (int i = 0; i <= winningConfigs.length - 1; i++) {
-//            System.out.print(winningConfigs[i].getWinningSpaces()[0] + ", ");
-//            System.out.print(winningConfigs[i].getWinningSpaces()[1] + ", ");
-//            System.out.print(winningConfigs[i].getWinningSpaces()[2] + ", ");
-//            System.out.print(winningConfigs[i].getWinningSpaces()[3] + ", ");
-//            System.out.println();
-//
-//        }
-
-//    winningConfigs = new WinCondition[8];
-//    winningConfigs[0] = new WinCondition(0, 1, 2);
-//    winningConfigs[1] = new WinCondition(3, 4, 5);
-//    winningConfigs[2] = new WinCondition(6, 7, 8);
-//    winningConfigs[3] = new WinCondition(0, 3, 6);
-//    winningConfigs[4] = new WinCondition(1, 4, 7);
-//    winningConfigs[5] = new WinCondition(2, 5, 8);
-//    winningConfigs[6] = new WinCondition(0, 4, 8);
-//    winningConfigs[7] = new WinCondition(2, 4, 6);
 	}
 
   // getter method; note that there is
@@ -214,12 +186,6 @@ public class Board
             {
                 WinCondition config = winningConfigs[i];
                 // if a player HAS achieved a particular win configuration on the board...
-
-//                System.out.print(config.getWinningSpaces()[0] + ", ");
-//                System.out.print(config.getWinningSpaces()[1] + ", ");
-//                System.out.print(config.getWinningSpaces()[2] + ", ");
-//                System.out.print(config.getWinningSpaces()[3] + ", ");
-//                System.out.println();
 
                 if (checkConfiguration(config)) {
                     // if the config is a winning condition, then all three Spaces
