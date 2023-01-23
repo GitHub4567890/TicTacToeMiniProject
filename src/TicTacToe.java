@@ -4,6 +4,7 @@ public class TicTacToe
 {
 	private Player[] players;
 	private Board board;
+    private static int turns = 0;
   
   /**
    * Creates a player with the symbol X and a player with the symbol O
@@ -71,7 +72,7 @@ public class TicTacToe
     * If the board is full, print a message and return true.
     * Otherwise, the game is not yet over and return false.
     *
-    * @param p  the player taking the turn.
+    * @param player  the player taking the turn.
     * @return  true if the GAME is over, false if the TURN is over but the game is not over
     */
 	public boolean takeTurn(Player player)
@@ -87,12 +88,14 @@ public class TicTacToe
       int chosenSpace = scanner.nextInt();
       selectedValidSpace = board.recordMove(chosenSpace, player);
    	}
+    turns++;
+
 
     // redraw the board, which will include the newly placed X or O as updated via recordMove
   	board.drawBoard();
 
     // check to see if the board reveals a winning condition for either X or O
-		String winner = board.checkWinner();
+    String winner = board.checkWinner();
 
     if (!winner.equals(Space.BLANK))
 		{
