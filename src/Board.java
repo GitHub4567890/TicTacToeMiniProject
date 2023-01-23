@@ -20,7 +20,7 @@ public class Board
         boardSize = scan.nextInt();
     }
     boardLength = (int) Math.sqrt(boardSize);
-    spaces = new Space[boardSize];
+    spaces = new Space[boardSize + 5];
     for (int i = 0; i < spaces.length; i++)
     {
       spaces[i] = new Space();
@@ -77,14 +77,14 @@ public class Board
             counter++;
         }
 
-        for (int i = 0; i <= winningConfigs.length - 1; i++) {
-            System.out.print(winningConfigs[i].getWinningSpaces()[0] + ", ");
-            System.out.print(winningConfigs[i].getWinningSpaces()[1] + ", ");
-            System.out.print(winningConfigs[i].getWinningSpaces()[2] + ", ");
-            System.out.print(winningConfigs[i].getWinningSpaces()[3] + ", ");
-            System.out.println();
-
-        }
+//        for (int i = 0; i <= winningConfigs.length - 1; i++) {
+//            System.out.print(winningConfigs[i].getWinningSpaces()[0] + ", ");
+//            System.out.print(winningConfigs[i].getWinningSpaces()[1] + ", ");
+//            System.out.print(winningConfigs[i].getWinningSpaces()[2] + ", ");
+//            System.out.print(winningConfigs[i].getWinningSpaces()[3] + ", ");
+//            System.out.println();
+//
+//        }
 
 //    winningConfigs = new WinCondition[8];
 //    winningConfigs[0] = new WinCondition(0, 1, 2);
@@ -215,11 +215,11 @@ public class Board
                 WinCondition config = winningConfigs[i];
                 // if a player HAS achieved a particular win configuration on the board...
 
-                System.out.print(config.getWinningSpaces()[0] + ", ");
-                System.out.print(config.getWinningSpaces()[1] + ", ");
-                System.out.print(config.getWinningSpaces()[2] + ", ");
-                System.out.print(config.getWinningSpaces()[3] + ", ");
-                System.out.println();
+//                System.out.print(config.getWinningSpaces()[0] + ", ");
+//                System.out.print(config.getWinningSpaces()[1] + ", ");
+//                System.out.print(config.getWinningSpaces()[2] + ", ");
+//                System.out.print(config.getWinningSpaces()[3] + ", ");
+//                System.out.println();
 
                 if (checkConfiguration(config)) {
                     // if the config is a winning condition, then all three Spaces
@@ -245,12 +245,15 @@ public class Board
    */
 	public boolean checkConfiguration(WinCondition comboToCheck)
 	{
+    if (comboToCheck == null) {
+        return false;
+    }
     int[] winningSpaces = comboToCheck.getWinningSpaces();
     if (boardLength == 3) {
         int s1 = winningSpaces[0];
         int s2 = winningSpaces[1];
         int s3 = winningSpaces[2];
-        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol();
+        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && (spaces[s1].getSymbol() != Space.BLANK && spaces[s2].getSymbol() != Space.BLANK && spaces[s3].getSymbol() != Space.BLANK);
 
     }
     if (boardLength == 4) {
@@ -258,7 +261,7 @@ public class Board
         int s2 = winningSpaces[1];
         int s3 = winningSpaces[2];
         int s4 = winningSpaces[3];
-        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && spaces[s1].getSymbol() == spaces[s4].getSymbol();
+        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && spaces[s1].getSymbol() == spaces[s4].getSymbol() && (spaces[s1].getSymbol() != Space.BLANK && spaces[s2].getSymbol() != Space.BLANK && spaces[s3].getSymbol() != Space.BLANK && spaces[s4].getSymbol() != Space.BLANK);
 
     }
     if (boardLength == 5) {
@@ -267,7 +270,7 @@ public class Board
         int s3 = winningSpaces[2];
         int s4 = winningSpaces[3];
         int s5 = winningSpaces[4];
-        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && spaces[s1].getSymbol() == spaces[s4].getSymbol() && spaces[s1].getSymbol() == spaces[s5].getSymbol();
+        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && spaces[s1].getSymbol() == spaces[s4].getSymbol() && spaces[s1].getSymbol() == spaces[s5].getSymbol() && (spaces[s1].getSymbol() != Space.BLANK && spaces[s2].getSymbol() != Space.BLANK && spaces[s3].getSymbol() != Space.BLANK && spaces[s4].getSymbol() != Space.BLANK && spaces[s5].getSymbol() != Space.BLANK);
 
     }
     if (boardLength == 6) {
@@ -277,7 +280,7 @@ public class Board
         int s4 = winningSpaces[3];
         int s5 = winningSpaces[4];
         int s6 = winningSpaces[5];
-        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && spaces[s1].getSymbol() == spaces[s4].getSymbol() && spaces[s1].getSymbol() == spaces[s5].getSymbol() && spaces[s1].getSymbol() == spaces[s6].getSymbol();
+        return spaces[s1].getSymbol() == spaces[s2].getSymbol() && spaces[s1].getSymbol() == spaces[s3].getSymbol() && spaces[s1].getSymbol() == spaces[s4].getSymbol() && spaces[s1].getSymbol() == spaces[s5].getSymbol() && spaces[s1].getSymbol() == spaces[s6].getSymbol() && (spaces[s1].getSymbol() != Space.BLANK && spaces[s2].getSymbol() != Space.BLANK && spaces[s3].getSymbol() != Space.BLANK && spaces[s4].getSymbol() != Space.BLANK && spaces[s5].getSymbol() != Space.BLANK && spaces[s6].getSymbol() != Space.BLANK);
 
     }
         return false;
